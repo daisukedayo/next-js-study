@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./layout.css";
 import Sidenav from "@/components/Sidenav";
+import { UIProvider } from "@yamada-ui/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="layout">
-          <Sidenav />
-          <main className="content">{children}</main>
-        </div>
+        <UIProvider>
+          <div className="layout">
+            <Sidenav />
+            <main className="content">{children}</main>
+          </div>
+        </UIProvider>
       </body>
     </html>
   );
