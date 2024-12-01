@@ -1,8 +1,8 @@
 import React from "react";
 
-const SideNav: React.FC = () => {
+const SideNav = () => {
   return (
-    <nav>
+    <nav className="sidenav">
       <ul>
         <li>
           <a href="#home">Home</a>

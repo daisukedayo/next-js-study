@@ -1,0 +1,14 @@
+.layout {
+  display: flex;
+}
+
+.sidenav {
+  background-color: gray;
+  padding: 20px;
+  width: 200px;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
