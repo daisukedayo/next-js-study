@@ -1,24 +1,32 @@
-import React from "react";
+import {
+  Drawer,
+  DrawerHeader,
+  DrawerBody,
+  DrawerOverlay,
+  DrawerCloseButton,
+  VStack,
+} from "@yamada-ui/react";
+import { Separator } from "@yamada-ui/react";
 
-const SideNav = () => {
+interface SidenavProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function Sidenav({ isOpen, onClose }: SidenavProps) {
   return (
-    <nav className="sidenav">
-      <ul>
-        <li>
+    <Drawer isOpen={isOpen} onClose={onClose} placement={"left"} size={"xs"}>
+      <DrawerOverlay bg="blackAlpha.300" />
+      <DrawerCloseButton />
+      <DrawerHeader>メニュー</DrawerHeader>
+      <DrawerBody>
+        <VStack separator={<Separator />}>
           <a href="home">Home</a>
-        </li>
-        <li>
           <a href="about">About</a>
-        </li>
-        <li>
           <a href="services">Services</a>
-        </li>
-        <li>
           <a href="contact">Contact</a>
-        </li>
-      </ul>
-    </nav>
+        </VStack>
+      </DrawerBody>
+    </Drawer>
   );
-};
-
-export default SideNav;
+}
