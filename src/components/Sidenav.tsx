@@ -7,6 +7,7 @@ import {
   VStack,
 } from "@yamada-ui/react";
 import { Separator } from "@yamada-ui/react";
+import Link from "next/link";
 
 interface SidenavProps {
   isOpen: boolean;
@@ -21,10 +22,10 @@ export default function Sidenav({ isOpen, onClose }: SidenavProps) {
       <DrawerHeader>メニュー</DrawerHeader>
       <DrawerBody>
         <VStack separator={<Separator />}>
-          <a href="home">Home</a>
-          <a href="about">About</a>
-          <a href="services">Services</a>
-          <a href="contact">Contact</a>
+          <Link href="home">Home</Link>
+          <Link href="about">About</Link>
+          <Link href="services">Services</Link>
+          <Link href="contact">Contact</Link>
         </VStack>
       </DrawerBody>
     </Drawer>
