@@ -21,7 +21,7 @@ export default function ContactPage() {
         </FormControl>
         <FormControl>
           <Textarea placeholder="お問い合わせ内容をご記入ください" />
-        </FormControl>{" "}
+        </FormControl>
         <Button colorScheme="primary">送信</Button>
       </VStack>
     </Box>
