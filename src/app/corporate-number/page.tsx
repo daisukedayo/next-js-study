@@ -5,6 +5,18 @@ import { Suspense } from "react";
 dotenv.config();
 
 export default async function CorporateNumberPage() {
+  return (
+    <section>
+      <Suspense
+        fallback={<Loading variant={"circles"} color={`${"cyan"}.500`} />}
+      >
+        <ApiResponce />
+      </Suspense>
+    </section>
+  );
+}
+
+async function ApiResponce() {
   const apiKey = process.env.CORPORATE_NUMBER_API;
   const corporateNumber: string = "7000012050002"; // TODO 11桁を型で保証したい、
 
@@ -13,9 +25,7 @@ export default async function CorporateNumberPage() {
   const data = await fetch(endpoint);
 
   if (data.body === null) {
-    console.log("No data");
-    // TODO 画面にもデータ無いよと表示したい
-    return;
+    return <>APIのレスポンスが適切ではありません（body部が空）</>;
   }
 
   const reader = data.body.getReader();
@@ -26,26 +36,27 @@ export default async function CorporateNumberPage() {
   while (!done) {
     const { value, done: doneReading } = await reader.read();
     done = doneReading;
-    if (value) {
+
+    if (value !== undefined) {
       result += decoder.decode(value, { stream: !done });
     }
   }
+  const lines = result.split("\r\n");
+  lines.pop(); // 最後の要素が空になるので削除
 
-  console.log(result);
-  const lines = result.split("\n");
+  if (!lines.length) {
+    return <>そんな法人番号ない</>;
+  }
 
+  // データがあった場合
   return (
-    <section>
-      <Suspense
-        fallback={<Loading variant={"circles"} color={`${"cyan"}.500`} />}
-      >
-        <h1>API Response</h1>
-        <ul>
-          {lines.map((line, index) => (
-            <li key={index}>{line}</li>
-          ))}
-        </ul>
-      </Suspense>
-    </section>
+    <>
+      <h1>API Response</h1>
+      <ul>
+        {lines.map((line, index) => (
+          <li key={index}>{line}</li>
+        ))}
+      </ul>
+    </>
   );
 }
