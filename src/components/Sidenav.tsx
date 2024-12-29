@@ -24,7 +24,6 @@ export default function Sidenav({ isOpen, onClose }: SidenavProps) {
         <VStack separator={<Separator />}>
           <Link href="home">Home</Link>
           <Link href="about">About</Link>
-          <Link href="services">Services</Link>
           <Link href="corporate-number">法人番号検索</Link>
           <Link href="contact">Contact</Link>
         </VStack>

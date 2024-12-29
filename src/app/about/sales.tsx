@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { BarChart, BarProps } from "@yamada-ui/charts";
 
 export default function Sales() {
@@ -29,4 +30,3 @@ export default function Sales() {
   );
   return <BarChart data={data} series={series} dataKey="name" />;
 }
-import { useMemo } from "react";
