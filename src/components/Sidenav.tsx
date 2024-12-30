@@ -16,7 +16,7 @@ interface SidenavProps {
 
 export default function Sidenav({ isOpen, onClose }: SidenavProps) {
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} placement={"left"} size={"xs"}>
+    <Drawer open={isOpen} onClose={onClose} placement={"left"} size={"xs"}>
       <DrawerOverlay bg="blackAlpha.300" />
       <DrawerCloseButton />
       <DrawerHeader>メニュー</DrawerHeader>

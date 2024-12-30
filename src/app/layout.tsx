@@ -3,7 +3,8 @@
 import Sidenav from "@/components/Sidenav";
 import "./globals.css";
 import "./layout.css";
-import { UIProvider, Button, useDisclosure } from "@yamada-ui/react";
+import { UIProvider, useDisclosure } from "@yamada-ui/react";
+import { BsLayoutSidebarInset } from "react-icons/bs";
 
 export default function RootLayout({
   children,
@@ -17,7 +18,7 @@ export default function RootLayout({
       <body>
         <UIProvider>
           <div className="layout">
-            <Button onClick={onOpen}>Open Sidenav</Button>
+            <BsLayoutSidebarInset onClick={onOpen} className="sidebar-icon" />
             <Sidenav isOpen={isOpen} onClose={onClose} />
             <main className="content">{children}</main>
           </div>
