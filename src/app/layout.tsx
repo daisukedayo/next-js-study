@@ -5,6 +5,7 @@ import "./globals.css";
 import "./layout.css";
 import { UIProvider, useDisclosure } from "@yamada-ui/react";
 import { BsLayoutSidebarInset } from "react-icons/bs";
+import { Tooltip } from "@yamada-ui/react";
 
 export default function RootLayout({
   children,
@@ -18,7 +19,9 @@ export default function RootLayout({
       <body>
         <UIProvider>
           <div className="layout">
-            <BsLayoutSidebarInset onClick={onOpen} className="sidebar-icon" />
+            <Tooltip label="メニューを開きます">
+              <BsLayoutSidebarInset onClick={onOpen} className="sidebar-icon" />
+            </Tooltip>
             <Sidenav isOpen={isOpen} onClose={onClose} />
             <main className="content">{children}</main>
           </div>

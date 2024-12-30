@@ -16,6 +16,7 @@
 
 .sidebar-icon {
   margin: 10px;
+  min-width: 24px;
   width: 24px;
   height: 24px;
 }
