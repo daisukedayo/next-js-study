@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Input, VStack } from "@yamada-ui/react";
-import { FormEventHandler } from "react";
+import { Button, FormControl, Input, Select, VStack } from "@yamada-ui/react";
+import { FormEventHandler, useState } from "react";
 
 const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
   event.preventDefault();
@@ -11,39 +11,44 @@ const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
   alert(`FirstName: ${firstName}\nLastName: ${lastName}`);
 };
 
-let isValid = false;
-
-const validateForm = (event: React.ChangeEvent<HTMLFormElement>) => {
-  const form = event.currentTarget;
-  const firstName = form.firstName.value;
-  const lastName = form.lastName.value;
-  isValid = /^[a-zA-Z]+$/.test(firstName) && /^[a-zA-Z]+$/.test(lastName);
-  console.log(`${firstName} ${lastName} ${isValid}`);
-};
-
 export default function NoUseStateForm() {
+  /** フォームの入力内容が有効かを保持する変数 */
+  const [isFormValid, setFormValid] = useState(false);
+
+  const validateForm = (event: React.ChangeEvent<HTMLFormElement>) => {
+    const form = event.currentTarget;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    if (/^[a-zA-Z]+$/.test(firstName) && /^[a-zA-Z]+$/.test(lastName)) {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit} onChange={validateForm}>
-        <VStack>
-          <label>名字</label>
+    <form onSubmit={handleSubmit} onChange={validateForm}>
+      <VStack>
+        <FormControl label="名字">
           <Input
             name="firstName"
             defaultValue=""
             placeholder="FirstNameは英字で入力してください。"
           />
+        </FormControl>
 
-          <label>名前</label>
+        <FormControl label="名前">
           <Input
             name="lastName"
             defaultValue=""
             placeholder="LastNameは英字で入力してください。"
           />
-          <Button type="submit" colorScheme="primary">
-            送信
-          </Button>
-        </VStack>
-      </form>
-    </div>
+        </FormControl>
+
+        <Button disabled={!isFormValid} type="submit" colorScheme="primary">
+          送信
+        </Button>
+      </VStack>
+    </form>
   );
 }
