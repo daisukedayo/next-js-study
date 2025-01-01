@@ -8,7 +8,8 @@ NextJS を触りつつ、UI ライブラリ「YamadaUI」を触る用のリポ�
 
 ## 実行する
 
-- Docker を起動する。
+- Docker Desktop を起動の上、Docker を起動する`docker-compose up -d`。
+  ※Docker Desktop が起動していないと、`Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?`と怒られてる。
 - 起動後、`npm run dev`を実施。
 
 ## その他
