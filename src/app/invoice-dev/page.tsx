@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, FormControl, Input, Select, VStack } from "@yamada-ui/react";
-import { FormEventHandler, useState } from "react";
+import { useState, ChangeEvent, FormEventHandler } from "react";
+import { Button, FormControl, Input, VStack, Text } from "@yamada-ui/react";
 
 const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
   event.preventDefault();
@@ -12,40 +12,56 @@ const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
 };
 
 export default function NoUseStateForm() {
-  /** フォームの入力内容が有効かを保持する変数 */
-  const [isFormValid, setFormValid] = useState(false);
+  const [validity, setValidity] = useState({
+    firstName: true,
+    lastName: true,
+  });
 
-  const validateForm = (event: React.ChangeEvent<HTMLFormElement>) => {
-    const form = event.currentTarget;
-    const firstName = form.firstName.value;
-    const lastName = form.lastName.value;
-    if (/^[a-zA-Z]+$/.test(firstName) && /^[a-zA-Z]+$/.test(lastName)) {
-      setFormValid(true);
-    } else {
-      setFormValid(false);
+  const validateField = (name: string, value: string) => {
+    if (name === "firstName" || name === "lastName") {
+      return /^[a-zA-Z]+$/.test(value);
     }
+    return true;
   };
 
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setValidity((prevValidity) => ({
+      ...prevValidity,
+      [name]: validateField(name, value),
+    }));
+  };
+
+  const isFormValid = Object.values(validity).every(Boolean);
+
   return (
-    <form onSubmit={handleSubmit} onChange={validateForm}>
+    <form onSubmit={handleSubmit}>
       <VStack>
-        <FormControl label="名字">
+        <FormControl
+          label="名字"
+          invalid={!validity.firstName}
+          errorMessage="FirstNameは英字で入力してください。"
+        >
           <Input
             name="firstName"
             defaultValue=""
             placeholder="FirstNameは英字で入力してください。"
+            onChange={handleChange}
           />
         </FormControl>
-
-        <FormControl label="名前">
+        <FormControl
+          label="名前"
+          invalid={!validity.lastName}
+          errorMessage="LastNameは英字で入力してください。"
+        >
           <Input
             name="lastName"
             defaultValue=""
             placeholder="LastNameは英字で入力してください。"
+            onChange={handleChange}
           />
         </FormControl>
-
-        <Button disabled={!isFormValid} type="submit" colorScheme="primary">
+        <Button type="submit" colorScheme="primary" disabled={!isFormValid}>
           送信
         </Button>
       </VStack>
