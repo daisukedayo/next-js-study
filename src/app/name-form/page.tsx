@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, ChangeEvent, FormEventHandler } from "react";
-import { Button, FormControl, Input, VStack, Text } from "@yamada-ui/react";
+import { Button, FormControl, Input, VStack } from "@yamada-ui/react";
 
 const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
   event.preventDefault();
