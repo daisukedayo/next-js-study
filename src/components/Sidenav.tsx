@@ -26,6 +26,7 @@ export default function Sidenav({ isOpen, onClose }: SidenavProps) {
           <Link href="about">About</Link>
           <Link href="corporate-number">法人番号検索</Link>
           <Link href="contact">Contact</Link>
+          <Link href="invoice">Invoice</Link>
         </VStack>
       </DrawerBody>
     </Drawer>
