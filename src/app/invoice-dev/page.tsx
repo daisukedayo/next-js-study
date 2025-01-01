@@ -1,6 +1,6 @@
 "use client";
 
-import { VStack } from "@yamada-ui/react";
+import { Button, Input, VStack } from "@yamada-ui/react";
 import { FormEventHandler } from "react";
 
 const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -8,41 +8,42 @@ const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
   const form = new FormData(event.currentTarget);
   const firstName = form.get("firstName") || "";
   const lastName = form.get("lastName") || "";
-  const question = form.get("question") || "";
-  alert(
-    `FirstName: ${firstName}\nLastName: ${lastName}\nQuestion: ${question}`
-  );
+  alert(`FirstName: ${firstName}\nLastName: ${lastName}`);
+};
+
+let isValid = false;
+
+const validateForm = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const form = event.currentTarget;
+  const firstName = form.firstName.value;
+  const lastName = form.lastName.value;
+  isValid = /^[a-zA-Z]+$/.test(firstName) && /^[a-zA-Z]+$/.test(lastName);
+  console.log(`${firstName} ${lastName} ${isValid}`);
 };
 
 export default function NoUseStateForm() {
   return (
-    <form onSubmit={handleSubmit}>
-      <VStack>
-        <label>
-          FirstName:
-          <input
-            type="text"
+    <div>
+      <form onSubmit={handleSubmit} onChange={validateForm}>
+        <VStack>
+          <label>名字</label>
+          <Input
             name="firstName"
             defaultValue=""
-            pattern="[a-zA-Z]"
+            placeholder="FirstNameは英字で入力してください。"
           />
-          <span className="error-message">
-            FirstNameは英字で入力してください。
-          </span>
-        </label>
-        <label>
-          LastName:
-          <input
-            type="text"
+
+          <label>名前</label>
+          <Input
             name="lastName"
             defaultValue=""
-            pattern="[a-zA-Z]"
+            placeholder="LastNameは英字で入力してください。"
           />
-          <span className="error-message">
-            LastNameは英字で入力してください。
-          </span>
-        </label>
-      </VStack>
-    </form>
+          <Button type="submit" colorScheme="primary">
+            送信
+          </Button>
+        </VStack>
+      </form>
+    </div>
   );
 }
