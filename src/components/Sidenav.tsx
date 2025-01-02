@@ -28,6 +28,7 @@ export default function Sidenav({ isOpen, onClose }: SidenavProps) {
           <Link href="contact">Contact</Link>
           <Link href="invoice">Invoice</Link>
           <Link href="name-form">フォームの練習</Link>
+          <Link href="cart">カート</Link>
         </VStack>
       </DrawerBody>
     </Drawer>
