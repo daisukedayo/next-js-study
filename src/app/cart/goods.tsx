@@ -19,6 +19,9 @@ const Goods: React.FC<GoodsProps> = ({ name, price, addToCart }) => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        border: "1px solid #ccc",
+        padding: "10px",
+        margin: "10px 0",
       }}
     >
       <div>
@@ -28,9 +31,9 @@ const Goods: React.FC<GoodsProps> = ({ name, price, addToCart }) => {
           style={{ width: "100px", height: "100px" }}
         />
       </div>
-      <div>
-        <h3>{name}</h3>
-        <p>¥{price}</p>
+      <div style={{ flex: 1, textAlign: "center" }}>
+        <h3 style={{ margin: 0 }}>{name}</h3>
+        <p style={{ margin: 0 }}>¥{price}</p>
       </div>
       <div>
         <select

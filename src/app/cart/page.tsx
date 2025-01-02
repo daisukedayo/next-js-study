@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Goods from "./goods";
+import OutOfStock from "./outOfStock";
 
 interface Goods {
   price: number;
@@ -74,16 +75,18 @@ const CartPage = () => {
           </div>
         </div>
       )}
-      {goodsList
-        .filter((goods) => goods.isSale)
-        .map((goods) => (
+      {goodsList.map((goods) =>
+        goods.isSale ? (
           <Goods
             key={goods.name}
             name={goods.name}
             price={goods.price}
             addToCart={handleAddToCart}
           />
-        ))}
+        ) : (
+          <OutOfStock key={goods.name} name={goods.name} />
+        )
+      )}
     </div>
   );
 };
