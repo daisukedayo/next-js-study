@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { VStack } from "@yamada-ui/react";
 import Goods from "./goods";
 import OutOfStock from "./outOfStock";
 
@@ -11,7 +12,6 @@ interface Goods {
 }
 
 const CartPage = () => {
-  const [targetCount, setTargetCount] = useState(0);
   // TODO set の関数つかってないよね。
   const [goodsList, setGoodsList] = useState<Goods[]>([
     { price: 1000, name: "Item 1", isSale: true },
@@ -75,18 +75,20 @@ const CartPage = () => {
           </div>
         </div>
       )}
-      {goodsList.map((goods) =>
-        goods.isSale ? (
-          <Goods
-            key={goods.name}
-            name={goods.name}
-            price={goods.price}
-            addToCart={handleAddToCart}
-          />
-        ) : (
-          <OutOfStock key={goods.name} name={goods.name} />
-        )
-      )}
+      <VStack spacing={4}>
+        {goodsList.map((goods) =>
+          goods.isSale ? (
+            <Goods
+              key={goods.name}
+              name={goods.name}
+              price={goods.price}
+              addToCart={handleAddToCart}
+            />
+          ) : (
+            <OutOfStock key={goods.name} name={goods.name} />
+          )
+        )}
+      </VStack>
     </div>
   );
 };

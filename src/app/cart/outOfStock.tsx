@@ -7,7 +7,7 @@ interface OutOfStockProps {
 
 const OutOfStock: React.FC<OutOfStockProps> = ({ name }) => {
   return (
-    <Card style={{ margin: "10px 0" }}>
+    <Card style={{ margin: "10px 0", padding: "10px" }}>
       <div
         style={{
           display: "flex",
