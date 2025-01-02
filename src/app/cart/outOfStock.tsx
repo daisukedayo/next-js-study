@@ -1,4 +1,5 @@
 import React from "react";
+import { Card } from "@yamada-ui/react";
 
 interface OutOfStockProps {
   name: string;
@@ -6,30 +7,29 @@ interface OutOfStockProps {
 
 const OutOfStock: React.FC<OutOfStockProps> = ({ name }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        border: "1px solid #ccc",
-        padding: "10px",
-        margin: "10px 0",
-      }}
-    >
-      <div>
-        <img
-          src="dummy-image-url"
-          alt="商品画像"
-          style={{ width: "100px", height: "100px" }}
-        />
+    <Card style={{ margin: "10px 0" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <img
+            src="https://www.itoen.jp/oiocha/products/img/product-list_01.png"
+            alt="商品画像"
+            style={{ width: "100px", height: "100px" }}
+          />
+        </div>
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <h3 style={{ margin: 0 }}>{name}</h3>
+        </div>
+        <div style={{ width: "150px", textAlign: "center" }}>
+          <p style={{ margin: 0 }}>在庫切れ</p>
+        </div>
       </div>
-      <div style={{ flex: 1, textAlign: "center" }}>
-        <h3 style={{ margin: 0 }}>{name}</h3>
-      </div>
-      <div style={{ width: "150px", textAlign: "center" }}>
-        <p style={{ margin: 0 }}>在庫切れ</p>
-      </div>
-    </div>
+    </Card>
   );
 };
 
